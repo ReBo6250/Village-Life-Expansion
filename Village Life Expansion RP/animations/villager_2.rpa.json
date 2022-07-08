@@ -1,0 +1,79 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.villager_2.look_at_target": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": ["query.target_x_rotation - this", "query.target_y_rotation - this", 0]
+				}
+			}
+		},
+		"animation.villager_2.baby_transform": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"scale": 1.5
+				}
+			}
+		},
+		"animation.villager_2.cross_arms": {
+			"loop": true,
+			"bones": {
+				"arms": {
+					"rotation": [-42.97, 0, 0],
+					"position": [0, -1, -1]
+				},
+				"leftArm": {
+					"position": [-5, 0, 0],
+					"scale": 0
+				},
+				"rightArm": {
+					"position": [5, 0, 0],
+					"scale": 0
+				}
+			}
+		},
+		"animation.villager_2.get_in_bed": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"rotation": [-90, 0, 0],
+					"position": [0, 1, -15]
+				},
+				"arms": {
+					"scale": 0
+				}
+			}
+		},
+		"animation.villager_2.move": {
+			"anim_time_update": "query.modified_distance_moved",
+			"loop": true,
+			"bones": {
+				"leg0": {
+					"rotation": ["(math.cos(query.anim_time * 38.17) * 40.0) - this", "-this", 0]
+				},
+				"leg1": {
+					"rotation": ["(math.cos(query.anim_time * 38.17 + 180) * 40.0) - this", "-this", 0]
+				},
+				"rightArm": {
+					"rotation": ["(math.cos(query.anim_time * 16.17 + 180) * 40.0) - this", "-this", 0]
+				},
+				"leftArm": {
+					"rotation": ["(math.cos(query.anim_time * 16.17) * 40.0) - this", "-this", 0]
+				}
+			}
+		},
+		"animation.villager_2.raise_arms": {
+			"loop": true,
+			"bones": {
+				"arms": {
+					"rotation": ["variable.raise_arms * -15.0", 0, 0]
+				}
+			}
+		}
+	}
+}

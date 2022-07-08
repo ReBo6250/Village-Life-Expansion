@@ -1,0 +1,122 @@
+{
+	"format_version" : "1.10.0",
+	"animation_controllers" : {
+		"controller.animation.villager_v2.baby" : {
+			"initial_state" : "baby",
+			"states" : {
+				"baby" : {
+					"animations" : [
+						{
+							"baby_transform" : "q.is_baby"
+						}
+					]
+				}
+			}
+		},
+		"controller.animation.villager_v2.eyes" : {
+			"initial_state" : "default",
+			"states" : {
+				"default" : {
+					"on_entry": [
+						"v.eyes_closed = 0.0;",
+						"v.blink_timer = q.life_time + math.random(3, 10);"
+					],
+					"transitions" : [
+						{ "sleep" : "q.is_sleeping" },
+						{ "blink" : "v.blink_timer < q.life_time" }
+					]
+				},
+				"blink": {
+					"on_entry": [
+						"v.eyes_closed = 1.0;",
+						"v.blink_duration = q.life_time + 0.1;"					
+					],
+					"transitions": [
+						{ "default": "v.blink_duration < q.life_time"}
+					]
+					
+				},
+				"sleep": {
+					"on_entry": [
+						"v.eyes_closed = 1.0;"
+					],
+					"transitions": [
+						{ "default": "!q.is_sleeping"}
+					]
+				}
+			}
+		},
+		"controller.animation.villager_v2.general" : {
+			"initial_state" : "default",
+			"states" : {
+				"default" : {
+					"animations" : [
+						{ "look_at_target" : "!q.is_sleeping" }
+					]
+				}
+			}
+		},
+		"controller.animation.villager_v2.move" : {
+			"initial_state" : "default",
+			"states" : {
+				"default" : {
+					"animations" : [
+						{ "move" : "q.modified_move_speed" }
+					],
+					"blend_transition": 0.1,
+					"transitions" : [
+						{ "get_in_bed" : "q.is_sleeping" },
+						{ "idle": "!q.is_moving"}
+					]
+				},
+				"get_in_bed" : {
+					"animations" : [ "get_in_bed" ],
+					"transitions" : [
+						{ "default" : "!q.is_sleeping" }
+					]
+				},
+				"idle" : {
+					"on_entry": [
+						"v.idle_start = q.life_time;"
+					],
+					"blend_transition": 0.1,
+					"transitions" : [
+						{ "default" : "q.is_moving" },
+						{ "cross_arms": "v.idle_start + 3 < q.life_time"}
+					]
+				},
+				
+				"cross_arms" : {
+					"on_entry": [
+					],
+					"animations": [
+						"cross_arms"
+					],
+					"transitions" : [
+						{ "default" : "q.is_moving || q.is_sleeping" }
+					]
+				}
+			}
+		},
+		"controller.animation.villager_v2.raise_arms" : {
+			"initial_state" : "default",
+			"states" : {
+				"default" : {
+					"transitions" : [
+						{
+							"raising" : "variable.raise_arms > 0.0"
+						}
+					]
+				},
+				"raising" : {
+					"animations" : [ "raise_arms" ],
+					"transitions" : [
+						{
+							"default" : "variable.raise_arms == 0.0"
+						}
+					]
+				}
+			}
+		}
+	}
+}
