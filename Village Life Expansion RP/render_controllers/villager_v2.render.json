@@ -18,7 +18,7 @@
         "Array.skins[v.eyes_closed]"
       ]
     },
-    "controller.render.villager_v2_masked": {
+    "controller.render.villager_v2_biome": {
       "arrays": {
         "textures": {
           "Array.biomes": [ 
@@ -29,7 +29,20 @@
             "Texture.snow",
             "Texture.swamp",
             "Texture.taiga"
-          ],
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [
+        { "*": "Material.default" }
+      ],
+      "textures": [
+        "Array.biomes[query.mark_variant]"
+      ]
+    },
+    "controller.render.villager_v2_profession": {
+      "arrays": {
+        "textures": {
           "Array.professions": [
             "Texture.unskilled",
             "Texture.farmer",
@@ -51,13 +64,52 @@
       },
       "geometry": "Geometry.default",
       "materials": [
-        { "*": "(query.is_baby || variable.profession_index == 0) ? Material.default : Material.masked" }
+        { "*": "Material.default" }
       ],
       "textures": [
-        "Array.biomes[query.mark_variant]",
         "Array.professions[variable.profession_index]"
       ]
     },
+    // "controller.render.villager_v2_masked": {
+    //   "arrays": {
+    //     "textures": {
+    //       "Array.biomes": [ 
+    //         "Texture.plains",
+    //         "Texture.desert",
+    //         "Texture.jungle",
+    //         "Texture.savanna",
+    //         "Texture.snow",
+    //         "Texture.swamp",
+    //         "Texture.taiga"
+    //       ],
+    //       "Array.professions": [
+    //         "Texture.unskilled",
+    //         "Texture.farmer",
+    //         "Texture.fisherman",
+    //         "Texture.shepherd",
+    //         "Texture.fletcher",
+    //         "Texture.librarian",
+    //         "Texture.cartographer",
+    //         "Texture.cleric",
+    //         "Texture.armorer",
+    //         "Texture.weapon_smith",
+    //         "Texture.tool_smith",
+    //         "Texture.butcher",
+    //         "Texture.leatherworker",
+    //         "Texture.stonemason",
+    //         "Texture.nitwit"
+    //       ]
+    //     }
+    //   },
+    //   "geometry": "Geometry.default",
+    //   "materials": [
+    //     { "*": "(query.is_baby || variable.profession_index == 0) ? Material.default : Material.masked" }
+    //   ],
+    //   "textures": [
+    //     "Array.biomes[query.mark_variant]",
+    //     "Array.professions[variable.profession_index]"
+    //   ]
+    // },
     "controller.render.villager_v2_level": {
       "arrays": {
         "textures": {

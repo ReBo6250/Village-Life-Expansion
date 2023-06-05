@@ -19,10 +19,12 @@
 				"default" : {
 					"on_entry": [
 						"v.eyes_closed = 0.0;",
-						"v.blink_timer = q.life_time + math.random(3, 10);"
+						"v.blink_timer = q.life_time + math.random(3, 10);",
+						"v.current_health = q.health;"
 					],
 					"transitions" : [
 						{ "sleep" : "q.is_sleeping" },
+						{ "hurt" : "v.current_health > q.health" },
 						{ "blink" : "v.blink_timer < q.life_time" }
 					]
 				},
@@ -33,6 +35,12 @@
 					],
 					"transitions": [
 						{ "default": "v.blink_duration < q.life_time"}
+					]
+					
+				},
+				"hurt": {
+					"transitions": [
+						{ "blink": "return true;"}
 					]
 					
 				},
@@ -81,19 +89,7 @@
 					],
 					"blend_transition": 0.1,
 					"transitions" : [
-						{ "default" : "q.is_moving" },
-						{ "cross_arms": "v.idle_start + 3 < q.life_time"}
-					]
-				},
-				
-				"cross_arms" : {
-					"on_entry": [
-					],
-					"animations": [
-						"cross_arms"
-					],
-					"transitions" : [
-						{ "default" : "q.is_moving || q.is_sleeping" }
+						{ "default" : "q.is_moving" }
 					]
 				}
 			}
